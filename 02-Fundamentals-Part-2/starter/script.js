@@ -395,7 +395,7 @@ console.log(`${Mark.firstName} ${Mark.lastName} BMI(${Mark.BMI}) is ${Mark.BMI >
 
 
 
-*/
+
 
 //++++++++++++++++++++++++++++++++++++++++++
 //lesson 46 - for loop
@@ -404,3 +404,52 @@ console.log(`${Mark.firstName} ${Mark.lastName} BMI(${Mark.BMI}) is ${Mark.BMI >
  for(let i = 1; i <= 10; i++){
      console.log(`powtórzenie ${i}`)
  }
+
+
+
+
+ */
+
+//++++++++++++++++++++++++++++++++++++++++++
+//lesson 47 - looping arrays, breaking, counting
+ //++++++++++++++++++++++++++++++++++++++++++
+
+const hubertArray = [
+    'Hubert',
+    'Wojciechowski',
+    2037 - 1996,
+    'twój_stary',
+    ["Jan", "Stan", "uwuwłewuwłe_onietłe_osas"]
+];
+
+const types = []
+
+for(let i = 0; i < hubertArray.length ; i++){
+    console.log(hubertArray[i], typeof hubertArray[i] )
+    // types[i] = typeof hubertArray[i]
+    types.push(typeof hubertArray[i])
+    
+}
+console.log(types)
+
+
+
+const years = [1996, 1650, 1440, 800]
+const ages = []
+
+for (let i = 0; i < years.length; i++){
+    ages.push(2037 - years[i])
+}
+console.log(ages)
+
+console.log("--------- only string(continue) ----------")
+for (let i = 0; i < hubertArray.length; i++){
+    if(typeof hubertArray[i] !== 'string') continue;
+    console.log(hubertArray[i], typeof hubertArray[i])
+}
+
+console.log("--------- break ----------")
+for (let i = 0; i < hubertArray.length; i++){
+    if(typeof hubertArray[i] !== 'string') break;
+    console.log(hubertArray[i], typeof hubertArray[i])
+}
