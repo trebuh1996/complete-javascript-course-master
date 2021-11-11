@@ -408,7 +408,7 @@ console.log(`${Mark.firstName} ${Mark.lastName} BMI(${Mark.BMI}) is ${Mark.BMI >
 
 
 
- */
+
 
 //++++++++++++++++++++++++++++++++++++++++++
 //lesson 47 - looping arrays, breaking, counting
@@ -452,4 +452,34 @@ console.log("--------- break ----------")
 for (let i = 0; i < hubertArray.length; i++){
     if(typeof hubertArray[i] !== 'string') break;
     console.log(hubertArray[i], typeof hubertArray[i])
+}
+
+
+
+
+ */
+
+//++++++++++++++++++++++++++++++++++++++++++
+//lesson 48 - Looping Backwards and Loops in Loops
+ //++++++++++++++++++++++++++++++++++++++++++
+
+
+ const hubertArray = [
+    'Hubert',
+    'Wojciechowski',
+    2037 - 1996,
+    'hooker',
+    ["Jan", "Stan", "uwuwłewuwłe_onietłe_osas"]
+]
+
+for (let i = hubertArray.length - 1; i >= 0; i--){
+    console.log(i, hubertArray)
+}
+
+for (let ex = 1; ex < 4; ex++){
+    console.log(`------- starting exercise ${ex} --------`)
+    
+    for(let rep = 1; rep < 6; rep++){
+        console.log(`lifting weight repetition ${rep}`)
+    }
 }
