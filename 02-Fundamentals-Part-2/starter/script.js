@@ -342,7 +342,7 @@ console.log(hubert.age)
 // console.log(hubert['calcAge'](1996))
 
 
-*/
+
 
 //++++++++++++++++++++++++++++++++++++++++++
 //lesson 45 - coding challenge #3
@@ -392,3 +392,15 @@ console.log(`${Mark.firstName} ${Mark.lastName} BMI(${Mark.BMI}) is ${Mark.BMI >
 // console.log(Mark)
 // console.log(John)
 
+
+
+
+*/
+
+//++++++++++++++++++++++++++++++++++++++++++
+//lesson 46 - for loop
+ //++++++++++++++++++++++++++++++++++++++++++
+
+ for(let i = 1; i <= 10; i++){
+     console.log(`powtórzenie ${i}`)
+ }
