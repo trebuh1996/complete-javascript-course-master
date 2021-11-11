@@ -309,8 +309,11 @@ console.log(hubert.friends.length + 1)
     firstName: "Hubert",
     lastName: "Wojciechowski",
     birthYear: 1996,
-    job: "zpsa",
+    job: "Automatic",
     friends: ["Filip", "no_one"],
+    age: 11,
+    sex: "male",
+    license: false,
 
     // calcAge: function(birthYear){
     //     return 2037 - birthYear
@@ -321,18 +324,26 @@ console.log(hubert.friends.length + 1)
     //     return 2037 - this.birthYear
     // }
 
-    calcAge: function(){
+    calcAge: function() {
         //console.log(this)
-        return 2037 - this.birthYear
+        return 2021 - this.birthYear
+    },
+
+    getSummary: function() {
+        return `${this.firstName} is a ${this.calcAge()}-years old ${this.job} and ${this.sex === "male" ? "he" : "she"} has ${this.license ? "a" : "no"} driver's license.`
     }
 }
 
-console.log(hubert.calcAge())
-console.log(hubert.calcAge())
-console.log(hubert.calcAge())
-console.log(hubert.calcAge())
+// const text1 = `Hubert is a ${hubert.calcAge()}-years old ${hubert.job} and ${hubert.sex === "male" ? "he" : "she"} has ${hubert.license ? "a" : "no"} driver's license.`
 
+console.log(hubert.calcAge())
+console.log(hubert.getSummary())
+console.log(hubert.age)
 // console.log(hubert['calcAge'](1996))
 
 
 
+
+//++++++++++++++++++++++++++++++++++++++++++
+//lesson 45 - coding challenge #3
+ //++++++++++++++++++++++++++++++++++++++++++
