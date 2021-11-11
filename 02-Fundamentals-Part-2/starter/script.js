@@ -457,7 +457,7 @@ for (let i = 0; i < hubertArray.length; i++){
 
 
 
- */
+
 
 //++++++++++++++++++++++++++++++++++++++++++
 //lesson 48 - Looping Backwards and Loops in Loops
@@ -483,3 +483,29 @@ for (let ex = 1; ex < 4; ex++){
         console.log(`lifting weight repetition ${rep}`)
     }
 }
+
+
+
+ */
+
+//++++++++++++++++++++++++++++++++++++++++++
+//lesson 49 - While loop
+ //++++++++++++++++++++++++++++++++++++++++++
+
+ for (let rep = 1; rep <= 10; rep++){
+     console.log(`abcdef`)
+ }
+
+
+let rep = 1
+ while (rep <= 10){
+    console.log(`WHILE: Lifting weights repetition ${rep}`)
+    rep++
+ }
+
+ 
+ let dice = Math.trunc(Math.random() * 6) + 1;
+ while(dice !== 6){
+     console.log(`dice: ${dice}`)
+     dice = Math.trunc(Math.random() * 6) + 1;
+ }
