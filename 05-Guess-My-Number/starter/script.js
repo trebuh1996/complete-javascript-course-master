@@ -68,6 +68,7 @@ const reset = function (score, secretNumber) {
     score = 20
     secretNumber = '?'
     document.querySelector('.message').textContent = 'Start guessing...'
+    document.querySelector('.guess').value = ''
     document.querySelector('body').style.backgroundColor = '#222'
     document.querySelector('.number').style.width = '15rem'
     document.querySelector('.number').textContent = secretNumber
