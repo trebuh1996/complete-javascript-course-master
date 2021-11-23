@@ -58,13 +58,14 @@ Implement a game rest functionality, so that the player can make a new guess! He
 GOOD LUCK 😀
 */
 
-//const number = Math.trunc(Math.random() * numberTo) // here is code from 0 to 19
 const numberTo = 20
-let secretNumber = Math.trunc(Math.random() * numberTo + 1) // here is code from 1 to 20
+let secretNumber = Math.trunc(Math.random() * numberTo + 1)
 let score = 20
+let highScore = 0
 // document.querySelector('.number').textContent = secretNumber
 
-const reset = function (score, secretNumber) {
+// const reset = function (score, secretNumber) {
+const reset = function () {
     score = 20
     secretNumber = '?'
     document.querySelector('.message').textContent = 'Start guessing...'
@@ -73,7 +74,8 @@ const reset = function (score, secretNumber) {
     document.querySelector('.number').style.width = '15rem'
     document.querySelector('.number').textContent = secretNumber
     secretNumber = Math.trunc(Math.random() * numberTo + 1)
-    return [score, secretNumber]
+    document.querySelector('.score').textContent = score
+    //return [score, secretNumber]
 }
 
 const logScore = function (score, text) {
@@ -90,6 +92,10 @@ const winner = function () {
     document.querySelector('body').style.backgroundColor = '#60b347'
     document.querySelector('.number').style.width = '30rem'
     document.querySelector('.number').textContent = secretNumber
+    if (highScore < score) {
+        highScore = score
+        document.querySelector('.highscore').textContent = highScore
+    }
 }
 
 //console.log(secretNumber)
@@ -109,5 +115,6 @@ document.querySelector('.check').addEventListener('click', function () {
 })
 
 document.querySelector('.again').addEventListener('click', function () {
-    ;[score, secretNumber] = reset(score, secretNumber)
+    //;[score, secretNumber] = reset(score, secretNumber)
+    reset()
 })
