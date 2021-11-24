@@ -32,3 +32,17 @@ for (let i = 0; i < btnsOpenModal.length; i++)
 
 btnCloseModal.addEventListener('click', closeModal) //here you dont use () after calling function!
 overlay.addEventListener('click', closeModal) //here you dont use () after calling function!
+
+// ++++++++++++++++++++++++++++++++++++
+// 81. Handling an "Esc" Keypress Event
+// ++++++++++++++++++++++++++++++++++++
+
+document.addEventListener('keydown', function (e) {
+    // function(e) - return which key was pressed
+    // console.log(e.key)
+    // if (e.key === 'Escape') console.log('Esc was pressed')
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        // if pressed 'Esc' and modal does NOT contain the hidden class
+        closeModal() // then close modal
+    }
+})
