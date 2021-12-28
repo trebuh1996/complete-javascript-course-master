@@ -25,6 +25,10 @@ const restaurant = {
       open: 11,
       close: 23,
     },
+    mon: {
+      open: 15,
+      close: 17,
+    },
     sat: {
       open: 0, // Open 24 hours
       close: 24,
@@ -42,6 +46,11 @@ const restaurant = {
   },
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+  },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
   },
 };
 
@@ -140,49 +149,104 @@ const restaurant = {
 // ===================================================================
 //works on all iterables, not only on tables and objects
 
-const arr = [7, 8, 9];
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr);
+// const arr = [7, 8, 9];
+// const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+// console.log(badNewArr);
 
-// add all the array to the newArr using spread operator "..." while values in array are separated with comma
-const newArr = [1, 2, ...arr];
-console.log(newArr);
+// // add all the array to the newArr using spread operator "..." while values in array are separated with comma
+// const newArr = [1, 2, ...arr];
+// console.log(newArr);
 
-console.log(...newArr);
+// console.log(...newArr);
 
-// writning new array based on restaurant mainMenu, expanding witch new dish
-const newMenu = [...restaurant.mainMenu, 'Gnocchi'];
-console.log(newMenu);
+// // writning new array based on restaurant mainMenu, expanding witch new dish
+// const newMenu = [...restaurant.mainMenu, 'Gnocchi'];
+// console.log(newMenu);
 
-// Copy array - shallow copy
-const mainMenuCopy = [...restaurant.mainMenu];
+// // Copy array - shallow copy
+// const mainMenuCopy = [...restaurant.mainMenu];
 
-// Join two arrays
-const joinedMenuCopy = [...restaurant.mainMenu, ...newMenu];
-console.log(joinedMenuCopy);
+// // Join two arrays
+// const joinedMenuCopy = [...restaurant.mainMenu, ...newMenu];
+// console.log(joinedMenuCopy);
 
-// Iterables: arrays, strings, maps, sets, NOT objects
-const str = 'Jonas';
-const letters = [...str, ' ', 'S.'];
-console.log(letters);
+// // Iterables: arrays, strings, maps, sets, NOT objects
+// const str = 'Jonas';
+// const letters = [...str, ' ', 'S.'];
+// console.log(letters);
 
-// Real world example of using spread operator
-// use " \ " backslash to let thing JS that sign " ' " is the text and not the end of the string
-const ingredients = [
-  // prompt("Let's make pasta! Ingrediens 1?"),
-  // prompt('Ingredient 2?'),
-  // prompt('ingredient 3'),
+// // Real world example of using spread operator
+// // use " \ " backslash to let thing JS that sign " ' " is the text and not the end of the string
+// const ingredients = [
+//   // prompt("Let's make pasta! Ingrediens 1?"),
+//   // prompt('Ingredient 2?'),
+//   // prompt('ingredient 3'),
+// ];
+// console.log(ingredients);
+
+// //restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]); //slow one
+// restaurant.orderPasta(...ingredients); // fast and sexy
+
+// // Objects (not iterable but works with spread operator)
+// const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Giuseppe' };
+// console.log(newRestaurant);
+
+// const restaruantCopy = { ...restaurant };
+// restaruantCopy.name = 'Ristorante Roma';
+// console.log(restaruantCopy.name);
+// console.log(restaurant.name);
+
+// ===================================================================
+// 106. Rest pattern and Parameters ==================================
+// ===================================================================
+
+//spread patern is used to build new arrays or to pass multiple values
+//in both cases we use spread operator to expand an array into into individual elements
+
+//rest pattern have the same synthax but to collect multiple elements to array
+
+// spread is used to unpack an array
+// rest is used to pack elements into an array
+
+//SPREAD because on the RHS of:
+const arr = [1, 2, ...[3, 4]];
+
+//REST because on the LHS of:
+
+//a, b will be in main table, others will be packed to array nested in main array:
+// [a, b, [others]]
+//so we collect others into one array
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(others);
+console.log(arr);
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
 ];
-console.log(ingredients);
 
-//restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]); //slow one
-restaurant.orderPasta(...ingredients); // fast and sexy
+console.log(pizza, risotto, otherFood);
 
-// Objects (not iterable but works with spread operator)
-const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Giuseppe' };
-console.log(newRestaurant);
+// OBJECTS
+//only for weekdays
+const { sat, mon, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
 
-const restaruantCopy = { ...restaurant };
-restaruantCopy.name = 'Ristorante Roma';
-console.log(restaruantCopy.name);
-console.log(restaurant.name);
+// FUNCTIONS
+const add = function (...numbers) {
+  console.log(numbers);
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+
+add(2, 4, 5);
+add(2, 4, 5, 10, 12);
+add(2, 4, 5, 5, 5, 5, 6, 5, 5, 5, 5);
+
+// using spread operator for iterate all of the numbers in x table
+const x = [23, 1, 11];
+add(...x);
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
