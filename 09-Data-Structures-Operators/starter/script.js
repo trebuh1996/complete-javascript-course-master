@@ -164,10 +164,110 @@ const game = {
     team2: 6.5,
   },
 };
+///////////////////////////////////////
+//120. Coding Challenge #3
+///////////////////////////////////////
 
-// // // ///////////////////////////////////////
-// // // //116. Maps
-// // // ///////////////////////////////////////
+const airline = 'Tap Air Portugal';
+const plane = 'A320';
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+
+console.log(airline.length);
+console.log(airline.indexOf('r')); //position of a first occurance 'r' in string
+console.log(airline.lastIndexOf('r')); //pos of a last occurance 'r' in string
+console.log(airline.indexOf('portugal')); //case(lower/upper) sensitive
+console.log(airline.indexOf('Portugal')); //case(lower/upper) sensitive
+console.log(airline.slice(4, 7));
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.indexOf(' ')));
+console.log(airline.slice(airline.indexOf(' ') + 1));
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+const checkMiddleSeat = function (seat) {
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat xD');
+  else console.log('You got lucky');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+console.log(new String('jonas'));
+console.log(typeof new String('jonas'));
+console.log(typeof new String('jonas').slice());
+
+// ///////////////////////////////////////
+// //120. Coding Challenge #3
+// ///////////////////////////////////////
+
+// /*
+// Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+// 1. Create an array 'events' of the different game events that happened (no duplicates)
+// 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+// 3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+// 4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+//       [FIRST HALF] 17: ⚽️ GOAL
+
+// GOOD LUCK 😀
+// */
+
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+// // 1. Create an array 'events' of the different game events that happened (no duplicates)
+// const events = [...new Set(gameEvents.values())];
+// // [...question.values()]
+// console.log(events);
+
+// // 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// // 3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+
+// let sumTimeGameEvents = 0;
+// const gameEventsKeys = [...gameEvents.keys()];
+
+// for (let i = 0; i < gameEventsKeys.length - 1; i++) {
+//   if (i < gameEventsKeys.length) {
+//     sumTimeGameEvents += gameEventsKeys[i + 1] - gameEventsKeys[i];
+//   }
+// }
+// sumTimeGameEvents /= gameEventsKeys.length - 1;
+// console.log(
+//   `An event happened, on average, every ${sumTimeGameEvents} minutes`
+// );
+// // 3. from jonas
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
+
+// //4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+// // [FIRST HALF] 17: ⚽️ GOAL
+
+// for (const [key, value] of gameEvents) {
+//   console.log(
+//     `${key <= 45 ? '[FIRST HALF]' : '[SECOND HALF]'} ${key}: ${value}`
+//   );
+// }
+///////////////////////////////////////
+//118. Maps: Iteration
+///////////////////////////////////////
 
 // // SET
 // const rest = new Map();
@@ -213,37 +313,36 @@ const game = {
 // // data is stored in key value pairs in maps
 // // in map, the keys can have any type and it's the main difference to objects
 
-// // ///////////////////////////////////////
-// // //116. Maps: Iteration
-// // ///////////////////////////////////////
+///////////////////////////////////////
+//117. Maps: Fundamentals
+///////////////////////////////////////
 
-const question = new Map([
-  ['question', 'What is the best programming language in the world?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'JavaScript'],
-  ['correct', 3],
-  [true, 'Correct'],
-  [false, 'Try again!'],
-]);
+// const question = new Map([
+//   ['question', 'What is the best programming language in the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct'],
+//   [false, 'Try again!'],
+// ]);
 
-//Convert object to map
-console.log(Object.entries(openingHours));
-const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);
+// //Convert object to map
+// console.log(Object.entries(openingHours));
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
 
-for (const [key, value] of question) {
-  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
-}
+// // for (const [key, value] of question) {
+// //   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
 
-// const answer = Number(prompt('Your answer'));
-// console.log(answer);
-// console.log(question.get(question.get('correct') === answer));
+// // const answer = Number(prompt('Your answer'));
+// // console.log(answer);
+// // console.log(question.get(question.get('correct') === answer));
 
-// Convert map to array
-console.log(...question);
-console.log([...question.keys()]);
-console.log([...question.values()]);
+// // Convert map to array
+// console.log(...question);
+// console.log([...question.keys()]);
+// console.log([...question.values()]);
 
 // // ///////////////////////////////////////
 // // //116. Sets
