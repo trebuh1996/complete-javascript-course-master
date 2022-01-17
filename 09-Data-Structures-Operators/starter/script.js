@@ -164,40 +164,122 @@ const game = {
     team2: 6.5,
   },
 };
-///////////////////////////////////////
-//120. Coding Challenge #3
-///////////////////////////////////////
 
-const airline = 'Tap Air Portugal';
-const plane = 'A320';
-console.log(plane[0]);
-console.log(plane[1]);
-console.log(plane[2]);
+///////////////////////////////////////
+//123. Working With Strings - Part 3
+///////////////////////////////////////
+//Split and Join
+console.log('a+very+nice+string'.split('+'));
+console.log('Jonas Schmedtmann'.split(' '));
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
 
-console.log(airline.length);
-console.log(airline.indexOf('r')); //position of a first occurance 'r' in string
-console.log(airline.lastIndexOf('r')); //pos of a last occurance 'r' in string
-console.log(airline.indexOf('portugal')); //case(lower/upper) sensitive
-console.log(airline.indexOf('Portugal')); //case(lower/upper) sensitive
-console.log(airline.slice(4, 7));
-console.log(airline.slice(0, airline.indexOf(' ')));
-console.log(airline.slice(airline.indexOf(' ')));
-console.log(airline.slice(airline.indexOf(' ') + 1));
-console.log(airline.slice(-2));
-console.log(airline.slice(1, -1));
-const checkMiddleSeat = function (seat) {
-  const s = seat.slice(-1);
-  if (s === 'B' || s === 'E') console.log('You got the middle seat xD');
-  else console.log('You got lucky');
+// const passenger = 'jessica ann smith davis'
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+  for (const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+  }
+  console.log(namesUpper.join(' '));
 };
 
-checkMiddleSeat('11B');
-checkMiddleSeat('23C');
-checkMiddleSeat('3E');
+capitalizeName('jessica ann smith davis');
+///////////////////////////////////////
+//122. Working With Strings - Part 2
+///////////////////////////////////////
+// const airline = 'Tap Air Portugal';
+// console.log(airline.toLowerCase());
+// console.log(airline.toUpperCase());
 
-console.log(new String('jonas'));
-console.log(typeof new String('jonas'));
-console.log(typeof new String('jonas').slice());
+// // Fix capitalization in name
+// const passenger = 'JoNaS';
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect);
+
+// // Comparing emails
+// const email = 'hello@jonas.io';
+// const loginEmail = '   Hello@Jonas.Io \n';
+// const normalizedEmail = loginEmail.toLowerCase().trim().trimEnd();
+
+// console.log(normalizedEmail);
+// console.log(email);
+// console.log(email === normalizedEmail);
+
+// // Replacing
+// const priceEU = '288,97€';
+// const priceUS = priceEU.replace('€', '$').replace(',', '.');
+// console.log(priceEU);
+// console.log(priceUS);
+
+// // ReplaceAll
+// const announcement =
+//   'All passengers come to boarding door 23, Boarding door 23!';
+// console.log(announcement.replaceAll('door', 'gate'));
+
+// // Regular expresion
+// console.log(announcement.replace(/door/g, 'gate'));
+
+// // Booeans
+// const plane = 'Airbus dupa2 A320neo';
+// console.log(plane.includes('A320'));
+// console.log(plane.includes('dupa1'));
+// console.log(plane.startsWith('dupa2'));
+
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   console.log('Part of the new Airbus family');
+// }
+
+// // Practice exercise
+// const checkBaggage = function (items) {
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('You are NOT allowed on aboard');
+//   } else {
+//     console.log('Welcome aboard!');
+//   }
+// };
+// checkBaggage('I have a laptop, some food and pocket Knife');
+// checkBaggage('Socks and camera');
+// checkBaggage('Got some snakcs and a gun for protection');
+
+///////////////////////////////////////
+//121. Working With Strings - Part 1
+///////////////////////////////////////
+
+// const airline = 'Tap Air Portugal';
+// const plane = 'A320';
+// console.log(plane[0]);
+// console.log(plane[1]);
+// console.log(plane[2]);
+
+// console.log(airline.length);
+// console.log(airline.indexOf('r')); //position of a first occurance 'r' in string
+// console.log(airline.lastIndexOf('r')); //pos of a last occurance 'r' in string
+// console.log(airline.indexOf('portugal')); //case(lower/upper) sensitive
+// console.log(airline.indexOf('Portugal')); //case(lower/upper) sensitive
+// console.log(airline.slice(4, 7));
+// console.log(airline.slice(0, airline.indexOf(' ')));
+// console.log(airline.slice(airline.indexOf(' ')));
+// console.log(airline.slice(airline.indexOf(' ') + 1));
+// console.log(airline.slice(-2));
+// console.log(airline.slice(1, -1));
+// const checkMiddleSeat = function (seat) {
+//   const s = seat.slice(-1);
+//   if (s === 'B' || s === 'E') console.log('You got the middle seat xD');
+//   else console.log('You got lucky');
+// };
+
+// checkMiddleSeat('11B');
+// checkMiddleSeat('23C');
+// checkMiddleSeat('3E');
+
+// console.log(new String('jonas'));
+// console.log(typeof new String('jonas'));
+// console.log(typeof new String('jonas').slice());
 
 // ///////////////////////////////////////
 // //120. Coding Challenge #3
