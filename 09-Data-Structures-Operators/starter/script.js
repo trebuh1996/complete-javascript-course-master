@@ -143,6 +143,7 @@ const game = {
     ],
     [
       'Burki',
+
       'Schulz',
       'Hummels',
       'Akanji',
@@ -166,29 +167,136 @@ const game = {
 };
 
 ///////////////////////////////////////
-//123. Working With Strings - Part 3
+//125. String Methods Practice
 ///////////////////////////////////////
-//Split and Join
-console.log('a+very+nice+string'.split('+'));
-console.log('Jonas Schmedtmann'.split(' '));
-const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
-const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
-console.log(newName);
 
-// const passenger = 'jessica ann smith davis'
-const capitalizeName = function (name) {
-  const names = name.split(' ');
-  const namesUpper = [];
-  for (const n of names) {
-    namesUpper.push(n[0].toUpperCase() + n.slice(1));
-  }
-  console.log(namesUpper.join(' '));
+const logFlights = function ([text, departure, arrival, time]) {
+  return `${text.match('Delayed') ? '🛑' + text : text} from ${departure
+    .slice(0, 3)
+    .toUpperCase()} to ${arrival.slice(0, 3).toUpperCase()} (${time.replace(
+    ':',
+    'h'
+  )})`.padStart(50);
 };
+const separatedFlights = flights.replaceAll('_', ' ').split('+');
+const flightsTab = [];
 
-capitalizeName('jessica ann smith davis');
-///////////////////////////////////////
-//122. Working With Strings - Part 2
-///////////////////////////////////////
+for (const s of separatedFlights) flightsTab.push(s.trimStart().split(';'));
+for (const f of flightsTab) console.log(logFlights(f));
+
+console.log(flightsTab);
+
+// ///////////////////////////////////////
+// //124. Coding Challenge #4
+// ///////////////////////////////////////
+
+// /*
+// Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+// The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+// THIS TEST DATA (pasted to textarea)
+// underscore_case
+//  first_name
+// Some_Variable
+//   calculate_AGE
+// delayed_departure
+
+// SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+// underscoreCase      ✅
+// firstName           ✅✅
+// someVariable        ✅✅✅
+// calculateAge        ✅✅✅✅
+// delayedDeparture    ✅✅✅✅✅
+
+// HINT 1: Remember which character defines a new line in the textarea 😉
+// HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+// HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+// HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+// Afterwards, test with your own test data!
+
+// GOOD LUCK 😀
+// */
+
+// const camelCaseGen = function (text) {
+//   const texts = text
+//     .toLowerCase()
+//     .replaceAll(' ', '')
+//     .padEnd(30, ' ')
+//     .split('_');
+//   const textUpper = [];
+//   textUpper.push(texts[0]);
+//   let n = 1;
+//   for (n; n < texts.length; n++) {
+//     textUpper.push(texts[n][0].toUpperCase() + texts[n].slice(1));
+//   }
+//   return textUpper.join('');
+// };
+
+// document.body.append(document.createElement('textarea')); //utwórz obszar tekstu
+// document.body.append(document.createElement('button')); //utwórz przycisk
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const rows = document.querySelector('textarea').value.split('\n');
+//   // for (const r of rows) {
+//   for (let m = 0; m <= rows.length - 1; m++) {
+//     console.log(camelCaseGen(rows[m]) + '✅'.repeat(m + 1));
+//   }
+// });
+
+// ///////////////////////////////////////
+// //123. Working With Strings - Part 3
+// ///////////////////////////////////////
+
+// //Split and Join
+// console.log('a+very+nice+string'.split('+'));
+// console.log('Jonas Schmedtmann'.split(' '));
+// const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+// const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+// console.log(newName);
+
+// // const passenger = 'jessica ann smith davis'
+// const capitalizeName = function (name) {
+//   const names = name.split(' ');
+//   const namesUpper = [];
+//   for (const n of names) {
+//     namesUpper.push(n[0].toUpperCase() + n.slice(1));
+//   }
+//   console.log(namesUpper.join(' '));
+// };
+
+// capitalizeName('jessica ann smith davis');
+
+// // padding START
+// const message = 'Go to gate 23!';
+// console.log(message.padStart(25)); // add SPACES before string, so there will be 24 chars in full string
+// console.log(message.padStart(20, '=')); //add SIGNS before string, so there will be 24 chars in full string
+// console.log('dupa123'.padStart(20, '=')); //add SIGNS before string, so there will be 24 chars in full string
+// // padding END
+// console.log(message.padEnd(30, ' xD '));
+
+// // mask credit card number
+// const maskCreditCard = function (number) {
+//   const str = number + '';
+//   const last = str.slice(-4);
+//   return last.padStart(str.length, '*');
+// };
+
+// console.log(maskCreditCard(1234567890123456));
+// maskCreditCard('1234567890123456');
+
+// // Repeat
+// const message2 = 'Bad weather.. All Departures Delayed...';
+// console.log(message2.repeat(5));
+
+// const planesInLine = function (n) {
+//   console.log(`There are ${n} planes in line ${'✈'}`);
+// };
+// planesInLine(5);
+// ///////////////////////////////////////
+// //122. Working With Strings - Part 2
+// ///////////////////////////////////////
 // const airline = 'Tap Air Portugal';
 // console.log(airline.toLowerCase());
 // console.log(airline.toUpperCase());
