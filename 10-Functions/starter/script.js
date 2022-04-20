@@ -95,10 +95,6 @@
 //   return [first.toUpperCase(), ...others].join(' ');
 // };
 
-// //=========================================
-// //Highder-Order function (takes a functions)
-// //"Higher-order" means that this function operate in higher level of abstraction
-
 // const transformer = function (str, fn) {
 //   console.log(`Original string: ${str}`);
 //   console.log(`Trasnsforem string: ${fn(str)}`);
@@ -115,6 +111,9 @@
 
 // ['Jonas', 'Martha', 'Adam'].forEach(high5);
 
+// //Highder-Order function (takes a functions)
+// //"Higher-order" means that this function operate in higher level of abstraction
+
 //////////////////////////////////////////////////////////////////////////////
 //132. Functions Returning Functions
 //////////////////////////////////////////////////////////////////////////////
@@ -126,9 +125,13 @@ const greet = function (greeting) {
 };
 
 const greeterHey = greet('Hey');
+
 greeterHey('Jonas');
 greeterHey('Steven');
 greet('witaj')('grubasie');
 
-const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+const greetArr2 = greeting => name2 => console.log(`${greeting} ${name2}`);
+greetArr2('hello')('pablito');
+
+const greetArr = greeting => name1 => console.log(`${greeting} ${name1}`);
 greetArr('Hi')('Jonas');
