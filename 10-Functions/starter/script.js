@@ -118,20 +118,130 @@
 //132. Functions Returning Functions
 //////////////////////////////////////////////////////////////////////////////
 
-const greet = function (greeting) {
-  return function (name) {
-    console.log(`${greeting} ${name}`);
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+// const greeterHey = greet('Hey');
+
+// greeterHey('Jonas');
+// greeterHey('Steven');
+// greet('witaj')('grubasie');
+
+// const greetArr2 = greeting => name2 => console.log(`${greeting} ${name2}`);
+// greetArr2('hello')('pablito');
+
+// const greetArr = greeting => name1 => console.log(`${greeting} ${name1}`);
+// greetArr('Hi')('Jonas');
+
+//////////////////////////////////////////////////////////////////////////////
+//133. The call and apply Methods
+//////////////////////////////////////////////////////////////////////////////
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  // book: function() {}
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push(`flight ${this.iataCode}${flightNum}`, name);
+  },
+};
+
+lufthansa.book(239, 'Jonas Schmedtmann');
+lufthansa.book(635, 'Jon Smith');
+console.log(lufthansa);
+console.log();
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// call method
+// book(23, 'Sarah')
+book.call(eurowings, 23, 'Sarah Williams');
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper');
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 583, 'Mary Cooper');
+console.log(swiss);
+
+// Apply method - gets array of parameters
+const flightData = [583, 'George Cooper'];
+book.apply(swiss, flightData);
+console.log(swiss);
+// Call method
+book.call(swiss, ...flightData); // the same result call as apply
+
+//Bind method
+//not imediatelly call the function but return a new function where the THIS keyword is bound
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+bookEW(23, 'Stever Williams');
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Jonas Schmedtmann');
+bookEW23('Martha Cooper');
+
+lufthansa.planes = 300;
+
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+
+  console.log('   ');
+  console.log('   ');
+};
+
+// In event handler action the THIS keyword always points to the element on witch that hanlder is attached, so:
+
+//this will work but not on a button press
+lufthansa.buyPlane();
+
+//that will NOT work, because THIS keyword is attached directly to a button element
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane);
+
+//that will WORK, because THIS will be a function from lufthansa binded to lufthansa (get a function from lufthansa and bind context to object lufthansa)
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// PARTIAL APPLICATION
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+//here we dont care with THIS keyword, so pass null
+//return new function exacly the same as addTax, but with different tax percentage value
+const addVAT = addTax.bind(null, 0.23);
+console.log(addVAT(100));
+console.log(addVAT(23));
+
+// create a function that can return a function which will do what addVAT does
+const dupa = function (rate) {
+  return function (value) {
+    console.log(addTax(rate, value));
   };
 };
 
-const greeterHey = greet('Hey');
-
-greeterHey('Jonas');
-greeterHey('Steven');
-greet('witaj')('grubasie');
-
-const greetArr2 = greeting => name2 => console.log(`${greeting} ${name2}`);
-greetArr2('hello')('pablito');
-
-const greetArr = greeting => name1 => console.log(`${greeting} ${name1}`);
-greetArr('Hi')('Jonas');
+const dupa2 = dupa(0.5);
+dupa2(100);
