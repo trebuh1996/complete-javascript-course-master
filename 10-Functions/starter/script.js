@@ -281,42 +281,112 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  // This generates [0, 0, 0, 0]. More in the next section 😃
-  answers: new Array(4).fill(0),
-  registerNewAnswer: function () {
-    const promptVal = prompt(`${this.question}\n${this.options.join('\n')}`);
-    const numLang = parseInt(promptVal);
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section 😃
+//   answers: new Array(4).fill(0),
+//   registerNewAnswer: function () {
+//     const promptVal = prompt(`${this.question}\n${this.options.join('\n')}`);
+//     const numLang = parseInt(promptVal);
 
-    if (!isNaN(numLang)) {
-      if (numLang >= 0 && numLang <= 3) {
-        console.log(`you choose: ${numLang}`);
-        this.answers[numLang]++;
-        this.displayResults();
-      } else {
-        alert('Wrong number.\nChoose beetwen 0 and 3');
-      }
-    } else {
-      alert('Pass number, not character');
-    }
-  },
-  displayResults(type = 'array') {
-    if (type === 'array') {
-      console.log(this.answers);
-    } else if (type === 'string') {
-      console.log(`Poll results are ${this.answers.join(',')}`);
-    }
-    // console.log(this.answers);
-  },
-};
+//     if (!isNaN(numLang)) {
+//       if (numLang >= 0 && numLang <= 3) {
+//         console.log(`you choose: ${numLang}`);
+//         this.answers[numLang]++;
+//         this.displayResults();
+//       } else {
+//         alert('Wrong number.\nChoose beetwen 0 and 3');
+//       }
+//     } else {
+//       alert('Pass number, not character');
+//     }
+//   },
+//   displayResults(type = 'array') {
+//     if (type === 'array') {
+//       console.log(this.answers);
+//     } else if (type === 'string') {
+//       console.log(`Poll results are ${this.answers.join(',')}`);
+//     }
+//     // console.log(this.answers);
+//   },
+// };
 
-// poll.registerNewAnswer();
+// // poll.registerNewAnswer();
 
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-poll.displayResults.call({ answers: [5, 2, 3] }, 'array');
-poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+// poll.displayResults.call({ answers: [5, 2, 3] }, 'array');
+// poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+
+//////////////////////////////////////////////////////////////////////////////
+//136. Immediately Invoked Function Expressions (IIFE)
+//////////////////////////////////////////////////////////////////////////////
+
+// //IIFE - run function only once
+
+// const runOnce = function () {
+//   console.log('This will never run again 1');
+// };
+// runOnce();
+
+// //IIFE
+// (function () {
+//   console.log('This will never run again 2');
+// })();
+
+// (() => console.log('This will never run again 3'))();
+
+//////////////////////////////////////////////////////////////////////////////
+//137. Closures
+//////////////////////////////////////////////////////////////////////////////
+
+// const secureBooking = function () {
+//   let passsengerCount = 0;
+
+//   return function () {
+//     passsengerCount++;
+//     console.log(`${passsengerCount} passengers`);
+//   };
+// };
+
+// const booker = secureBooking();
+
+// booker();
+// booker();
+// booker();
+
+// console.dir(booker);
+
+//////////////////////////////////////////////////////////////////////////////
+//139. Coding Challenge #2
+//////////////////////////////////////////////////////////////////////////////
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+
+(function () {
+  const header = document.querySelector('h1');
+  const body = document.querySelector('body');
+  header.style.color = 'red';
+
+  const colorChange = function () {
+    header.style.color = 'green';
+  };
+
+  body.addEventListener('click', colorChange);
+})();
+
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// console.log(header);
