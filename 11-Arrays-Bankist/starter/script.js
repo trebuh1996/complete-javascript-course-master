@@ -61,44 +61,153 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${mov}</div>
+      </div>
+    `;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+
+console.log(containerMovements.innerHTML);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+// 142.
+/////////////////////////////////////////////////
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
+// let arr = ['a', 'b', 'c', 'd', 'e'];
 
-//slice - not mutates array
-console.log(arr.slice(2));
-console.log(arr.slice(2, 4));
-console.log(arr.slice(-2));
-console.log(arr.slice(-1));
-console.log(arr.slice(1, -2));
-console.log(arr.slice());
-console.log([...arr]);
+// //slice - not mutates array
+// console.log(arr.slice(2));
+// console.log(arr.slice(2, 4));
+// console.log(arr.slice(-2));
+// console.log(arr.slice(-1));
+// console.log(arr.slice(1, -2));
+// console.log(arr.slice());
+// console.log([...arr]);
 
-//splice - mutates array
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-// console.log(arr2.splice(2));
-// console.log(arr2.splice(-1));
+// //splice - mutates array
+// const arr2 = ['j', 'i', 'h', 'g', 'f'];
+// // console.log(arr2.splice(2));
+// // console.log(arr2.splice(-1));
 
-//reverse - mutates array
-console.log(arr2.reverse());
-console.log(arr2);
+// //reverse - mutates array
+// console.log(arr2.reverse());
+// console.log(arr2);
 
-//concat - not mutates array
-const letters = arr.concat(arr2);
-console.log(letters);
-console.log([...arr, ...arr2]);
+// //concat - not mutates array
+// const letters = arr.concat(arr2);
+// console.log(letters);
+// console.log([...arr, ...arr2]);
 
-//join - not mutates array
-console.log(letters.join(' - '));
+// //join - not mutates array
+// console.log(letters.join(' - '));
+
+/////////////////////////////////////////////////
+// 143. The new at Method
+/////////////////////////////////////////////////
+
+// const arr = [23, 11, 64];
+// console.log(arr[0]);
+// console.log(arr.at(0)); //new method
+
+// // getting last array element
+// console.log(arr[arr.length - 1]);
+// console.log(arr.slice(-1)[0]);
+// console.log(arr.at(-1));
+// console.log('jonas'.at(-1));
+
+/////////////////////////////////////////////////
+// 144. Looping Arrays: forEach
+/////////////////////////////////////////////////
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// console.log('----- STANDARD ------');
+// //standard type of for loop
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(`You withdraw ${Math.abs(movement)}`);
+//   }
+// }
+
+// //standard type of for loop with entries
+// console.log('----- ENTRIES ------');
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`Movement ${i + 1}: You deposited ${movement}`);
+//   } else {
+//     console.log(`Movement ${i + 1}: You withdraw ${movement}`);
+//   }
+// }
+
+// //forEach type of for loop
+// console.log('----- FOREACH ------');
+// movements.forEach(function (movement) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(`You withdraw ${Math.abs(movement)}`);
+//   }
+// });
+
+// //forEach with index type of for loop
+// console.log('----- FOREACH, index, array ------');
+// //the order of params in function always must be like this
+// movements.forEach(function (movement, index, array) {
+//   if (movement > 0) {
+//     console.log(`Movement ${index + 1}: You deposited ${movement}`);
+//   } else {
+//     console.log(`Movement ${index + 1}: You withdraw ${movement}`);
+//   }
+// });
+
+/////////////////////////////////////////////////
+// 145. forEach With Maps and Sets
+/////////////////////////////////////////////////
+
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
+
+// currencies.forEach(function (value, key, map) {
+//   console.log(`${key}: ${value}`);
+// });
+
+// // Set
+// const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+// console.log(currenciesUnique);
+// currenciesUnique.forEach(function (value, _, map) {
+//   console.log(`${value}: ${value}`);
+// });
+
+/////////////////////////////////////////////////
+// 147. Creating DOM Elements
+/////////////////////////////////////////////////
