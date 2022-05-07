@@ -78,29 +78,26 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} €`;
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes} €`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)} €`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       console.log(arr);
       return int >= 1;
@@ -108,7 +105,6 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest} €`;
 };
-calcDisplaySummary(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -118,11 +114,97 @@ const createUsernames = function (accs) {
       .map(name => name[0])
       .join('');
   });
-  // return username;
 };
 
-// console.log(createUsernames('Steven Thomas Williams'));
 createUsernames(accounts);
+
+const updateUI = function (acc) {
+  // Display movements
+  displayMovements(acc.movements);
+  // Display balance
+  calcDisplayBalance(acc);
+  // Display summary
+  calcDisplaySummary(acc);
+};
+
+//Event handler
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault(); // prevent from refreshing site (from submitting)
+  // console.log('LOGIN');
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    console.log('LOGIN');
+    // Display UI and message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    // Update UI
+    updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault(); // prevetn default behaviour
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  // Clean input transfer fields
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    //wartość wpisana musi być wieksza niż 0
+    amount > 0 &&
+    //odbiorca musi istnieć
+    receiverAcc &&
+    //zawartość zalogowanego konta musi być większa niz zadeklarowana wartość do wysłania
+    currentAccount.balance >= amount &&
+    //odbiorca musi istnieć, a jego nazwa nie może się pokrywać z nazwą konta nadawcy
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    //Do the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccount);
+    console.log('Transfer valid');
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    console.log('action for deletion');
+    const i = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    // Delete account
+    accounts.splice(i, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+
+    // Clean input transfer fields
+    inputCloseUsername.value = inputClosePin.value = '';
+  }
+});
 
 // console.log(containerMovements.innerHTML);
 
@@ -417,21 +499,58 @@ GOOD LUCK 😀
 // 155. The Magic of Chaining Methods
 /////////////////////////////////////////////////
 
-const eur2usd = 1.1;
+// const eur2usd = 1.1;
 
-// PIPELINE
+// // PIPELINE
+// // const totalDepositsUSD = movements
+// //   .filter(mov => mov > 0)
+// //   .map(mov => mov * eur2usd)
+// //   .reduce((acc, mov) => acc + mov, 0);
+
+// // PIPELINE with log inside
 // const totalDepositsUSD = movements
 //   .filter(mov => mov > 0)
-//   .map(mov => mov * eur2usd)
+//   .map((mov, i, arr) => {
+//     console.log(arr);
+//     return mov * eur2usd;
+//   })
 //   .reduce((acc, mov) => acc + mov, 0);
 
-// PIPELINE with log inside
-const totalDepositsUSD = movements
-  .filter(mov => mov > 0)
-  .map((mov, i, arr) => {
-    console.log(arr);
-    return mov * eur2usd;
-  })
-  .reduce((acc, mov) => acc + mov, 0);
+// console.log(totalDepositsUSD);
 
-console.log(totalDepositsUSD);
+/////////////////////////////////////////////////
+// 154. Coding Challenge #3
+/////////////////////////////////////////////////
+
+// // The same as #2 but with chaining
+
+// const ages1 = [5, 2, 4, 1, 15, 8, 3];
+// const ages2 = [16, 6, 10, 5, 6, 1, 4];
+
+// const calcAverageHumanAge = ages =>
+//   ages
+//     .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+//     .filter(age => age >= 18)
+//     .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+// console.log('====HERE====');
+// console.log(ages1);
+// console.log(calcAverageHumanAge(ages1));
+// console.log(calcAverageHumanAge(ages2));
+
+/////////////////////////////////////////////////
+// 157. The find Method
+/////////////////////////////////////////////////
+
+// console.log('====HERE====');
+// const firstWithdrawal = movements.find(mov => mov < 0);
+// console.log(firstWithdrawal);
+
+// console.log(accounts);
+
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
+
+/////////////////////////////////////////////////
+// 158. Implementing Login
+/////////////////////////////////////////////////
